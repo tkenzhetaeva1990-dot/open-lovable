@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f8f1e6" />
+  <meta name="description" content="Қыз ұзату тойына шақыру — 20 қазан 2026, сағат 18:00, Астана." />
+  <title>Ұзату тойына шақыру</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js" defer></script><script src="script.js" defer></script>
+</head>
+<body>
+  <div id="cover" class="cover" aria-label="Шақыру хаты">
+    <div class="cover-ornament cover-ornament--top"></div>
+    <div class="cover-content">
+      <div class="eyebrow cover-eyebrow">СІЗГЕ АРНАЛҒАН ШАҚЫРУ</div>
+      <div class="envelope-scene" id="envelopeScene" aria-hidden="true">
+        <div class="envelope-letter"><span>Қыз ұзату</span><small>20.10.2026</small></div>
+        <div class="envelope-back"></div><div class="envelope-flap"></div><div class="envelope-front"></div>
+        <div class="envelope-seal">✧</div>
+      </div>
+      <h1>Ақ тілектің<br/><em>ақ босағасы</em></h1>
+      <p>Қуанышымызға ортақ болыңыз</p>
+      <button id="openInvitation" class="primary-btn cover-btn" type="button">Шақыруды ашу <span aria-hidden="true">↗</span></button>
+      <div class="cover-hint">Батырманы басыңыз</div>
+    </div>
+    <div class="cover-ornament cover-ornament--bottom"></div>
+  </div>
+
+  <div id="invitation" class="page" tabindex="-1">
+    <header class="hero decorated">
+      <img src="assets/florals.svg" class="floral floral--upper" alt=""/>
+      <span class="eyebrow hero-eyebrow reveal">ЕРЕКШЕ КҮНГЕ ШАҚЫРУ</span>
+      <span class="sparkle">✦</span>
+      <div class="hero-framed reveal">
+        <div class="ornament-line"><span>❦</span></div>
+        <h2 id="heroTitle">Ұзату тойына<br/><em>шақыру</em></h2>
+        <div class="hero-subtitle">ҚЫЗ ҰЗАТУ САЛТАНАТЫ</div>
+        <div class="hero-date" id="heroDate">20.10.2026</div>
+        <div class="ornament-line"><span>❦</span></div>
+      </div>
+      <div class="scroll-prompt">ТӨМЕН ҚАРАЙ ЖЫЛЖЫТЫҢЫЗ <span>↓</span></div>
+      <img src="assets/florals.svg" class="floral floral--lower" alt=""/>
+    </header>
+    <main>
+      <section class="greeting section decorated">
+        <div class="section-inner reveal">
+          <div class="section-kicker">ШАҚЫРУ</div>
+          <div class="divider-flower">✤</div>
+          <h2 id="greetingTitle">Құрметті қонақтар!</h2>
+          <p id="greetingText" class="greeting-copy">Құрметті ағайын-туыс, сіздерді ұзату тойымызға шақырамыз.</p>
+          <p class="muted-copy">Ақ тілек пен ізгі ниетке толы осы қуанышты кештің қадірлі қонағы болыңыз!</p>
+          <div class="signature">Ізгі ниетпен,</div><div id="hosts" class="hosts">Ата-анасы</div>
+        </div>
+      </section>
+      <section class="when section">
+        <div class="section-inner reveal">
+          <div class="section-kicker">КҮНІ МЕН УАҚЫТЫ</div>
+          <h2>Бақытты күн</h2>
+          <div class="date-hero"><span id="dayNum">20</span><div><strong id="monthName">ҚАЗАН</strong><small id="yearNum">2026</small></div></div>
+          <p class="weekday" id="weekdayText">Сейсенбі · 18:00</p>
+          <div class="calendar" aria-label="2026 жылғы қазан күнтізбесі">
+            <div class="calendar-head"><span id="calendarMonth">Қазан 2026</span><i>❦</i></div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </div>
+        </div>
+      </section>
+      <section class="venue section decorated">
+        <div class="section-inner reveal">
+          <div class="section-kicker">КЕЗДЕСУ ОРНЫ</div>
+          <h2>Сізді күтеміз!</h2>
+          <img src="assets/venue.svg" class="venue-illustration" alt="Салтанатты мейрамхана бейнесі" />
+          <h3 id="venueName">Baoli Highvill</h3>
+          <p id="venueAddress">Астана қаласы, Достық, 13</p>
+          <p class="venue-time" id="venueTime">Сағат 18:00-де</p>
+          <a class="outline-btn" id="mapLink" href="#" target="_blank" rel="noopener noreferrer">Картадан көру <span>↗</span></a>
+        </div>
+      </section>
+      <section class="countdown section">
+        <div class="section-inner reveal">
+          <div class="section-kicker">САҒАНЫШПЕН КҮТЕМІЗ</div>
+          <h2>Тойға дейін</h2>
+          <div id="countdown" class="countdown-grid" role="timer" aria-live="off">
+            <div><b id="cdDays">00</b><span>КҮН</span></div><div><b id="cdHours">00</b><span>САҒАТ</span></div><div><b id="cdMinutes">00</b><span>МИНУТ</span></div><div><b id="cdSeconds">00</b><span>СЕКУНД</span></div>
+          </div>
+          <p id="countdownFinished" class="countdown-finished" hidden>Той күні келді!</p>
+        </div>
+      </section>
+      <section class="rsvp section decorated" id="rsvp">
+        <div class="section-inner reveal">
+          <div class="section-kicker">ҚАТЫСУДЫ РАСТАУ</div>
+          <h2>Анкета</h2>
+          <p class="rsvp-intro">Келетініңізді алдын ала хабарласаңыз, қуанышты боламыз.</p>
+          <form id="rsvpForm">
+            <label for="guestName">Аты-жөніңіз</label><input id="guestName" name="guestName" type="text" placeholder="Аты-жөніңізді енгізіңіз" maxlength="120" autocomplete="name" required />
+            <fieldset><legend>Қатысуыңыз</legend><label class="radio-option"><input type="radio" name="attendance" value="Қатысамын" required checked /><span>Қатысамын</span></label><label class="radio-option"><input type="radio" name="attendance" value="Қатыса алмаймын"/><span>Қатыса алмаймын</span></label><label class="radio-option"><input type="radio" name="attendance" value="Әлі нақты емес"/><span>Әлі нақты емес</span></label></fieldset>
+            <label for="guestCount">Қонақ саны</label><div class="count-input"><button type="button" id="decreaseCount" aria-label="Қонақ санын азайту">−</button><input type="number" id="guestCount" name="guestCount" min="1" max="20" value="1" required /><button type="button" id="increaseCount" aria-label="Қонақ санын көбейту">+</button></div>
+            <button class="primary-btn send-btn" type="submit">WhatsApp арқылы жіберу <span>↗</span></button>
+            <p class="form-note">WhatsApp ашылады. Хабарламаны өзіңіз растап жібересіз.</p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer class="footer"><span>❦</span><div>Шын жүректен күтеміз!</div><small id="footerDate">20 қазан 2026 жыл</small></footer>
+  </div>
+</body>
+</html>
