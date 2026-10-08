@@ -1,0 +1,17 @@
+'use strict';
+const data=window.INVITATION,$=id=>document.getElementById(id),event=new Date(data.eventDate);
+const months=['қаңтар','ақпан','наурыз','сәуір','мамыр','маусым','шілде','тамыз','қыркүйек','қазан','қараша','желтоқсан'];
+const Y=+data.eventDate.slice(0,4),M=+data.eventDate.slice(5,7)-1,D=+data.eventDate.slice(8,10),H=data.eventDate.slice(11,16),month=months[M];
+$('heroTitle').textContent=data.title;$('greetingTitle').textContent=data.greetingTitle;$('greetingText').textContent=data.greetingText;$('hosts').textContent=data.hosts;
+$('heroDate').textContent=String(D).padStart(2,'0')+'.'+String(M+1).padStart(2,'0')+'.'+Y;
+$('dayNum').textContent=D;$('monthName').textContent=month.toUpperCase();$('yearNum').textContent=Y;$('calendarMonth').textContent=month[0].toUpperCase()+month.slice(1)+' '+Y;$('footerDate').textContent=D+' '+month+' '+Y+' жыл';
+$('weekdayText').textContent=['Жексенбі','Дүйсенбі','Сейсенбі','Сәрсенбі','Бейсенбі','Жұма','Сенбі'][new Date(Date.UTC(Y,M,D)).getUTCDay()]+' · '+H;
+$('venueName').textContent=data.venue;$('venueAddress').textContent=data.city+' қаласы, '+data.address;$('venueTime').textContent='Сағат '+H+'-де';$('mapLink').href=data.mapUrl;
+const cal=$('calendarGrid');['Дс','Сс','Ср','Бс','Жм','Сб','Жс'].forEach(s=>{const e=document.createElement('span');e.className='calendar-weekday';e.textContent=s;cal.append(e)});
+for(let i=0;i<(new Date(Date.UTC(Y,M,1)).getUTCDay()+6)%7;i++){const e=document.createElement('span');e.className='calendar-empty';cal.append(e)}
+for(let i=1;i<=new Date(Date.UTC(Y,M+1,0)).getUTCDate();i++){const e=document.createElement('span');e.className='calendar-day'+(i===D?' selected':'');e.textContent=i;cal.append(e)}
+function tick(){let t=Math.floor((+event-Date.now())/1000);if(t<=0){$('countdown').hidden=true;$('countdownFinished').hidden=false;return}const a=[Math.floor(t/86400),Math.floor(t%86400/3600),Math.floor(t%3600/60),t%60];['cdDays','cdHours','cdMinutes','cdSeconds'].forEach((id,i)=>$(id).textContent=String(a[i]).padStart(2,'0'))}tick();setInterval(tick,1000);
+let opened=false;$('openInvitation').addEventListener('click',()=>{if(opened)return;opened=true;$('cover').classList.add('opening');setTimeout(()=>{$('cover').classList.add('gone');document.body.classList.add('invite-open');showReveals()},900)});
+const sections=document.querySelectorAll('.reveal');function showReveals(){if(!('IntersectionObserver' in window)){sections.forEach(n=>n.classList.add('visible'));return}const ob=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ob.unobserve(e.target)}}),{threshold:.12});sections.forEach(n=>ob.observe(n))}
+function changeCount(n){const e=$('guestCount');e.value=Math.min(20,Math.max(1,(+e.value||1)+n))}$('increaseCount').addEventListener('click',()=>changeCount(1));$('decreaseCount').addEventListener('click',()=>changeCount(-1));
+$('rsvpForm').addEventListener('submit',e=>{e.preventDefault();const form=e.currentTarget;if(!form.reportValidity())return;const name=$('guestName').value.trim(),choice=form.querySelector('input[name="attendance"]:checked'),count=Number($('guestCount').value);if(!name||!choice||!Number.isInteger(count)||count<1||count>20)return;const msg='Ұзату тойына жауап\nАты-жөні: '+name+'\nЖауабы: '+choice.value+'\nҚонақ саны: '+count;const number=data.whatsapp.replace(/\D/g,'').replace(/^8/,'7');const url='https://wa.me/'+number+'?text='+encodeURIComponent(msg);const w=window.open(url,'_blank','noopener,noreferrer');if(!w)window.location.href=url;});
